@@ -38,7 +38,8 @@ public class SnakeGame extends Game {
 			for (TouchPoint p : TouchPoint.activeList) {
 				double x = (TouchPoint.transformX(p.getLastX()));
 				double y = (TouchPoint.transformY(p.getLastY()));
-				
+				snake.getHead().setX((float) x);
+				snake.getHead().setY((float) y);
 			}
 		}
 		snake.update();
