@@ -33,6 +33,7 @@ public class SnakeGame extends Game {
 	
 	@Override
 	public void render(GLRenderer renderer, GL10 gl) {
+		Image.setAlphaBlend(gl);
 		snake.render(gl);
 		food.render(gl);
 	}
