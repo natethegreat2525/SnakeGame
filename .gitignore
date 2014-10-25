@@ -2,4 +2,4 @@
 project.properties
 org.eclipse.*
 .classpath
-bin/*
+bin
