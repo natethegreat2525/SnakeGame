@@ -21,7 +21,11 @@ public class SnakeGame extends Game {
 	
 	public static Image bodyImage;
 	
+	public static Image foodImage;
+	
 	public Snake snake;
+	
+	public SnakeFood food;
 	
 	public SnakeGame(Context context) {
 		super(context);
@@ -30,6 +34,7 @@ public class SnakeGame extends Game {
 	@Override
 	public void render(GLRenderer renderer, GL10 gl) {
 		snake.render(gl);
+		food.render(gl);
 	}
 
 	@Override
@@ -49,6 +54,7 @@ public class SnakeGame extends Game {
 	@Override
 	public void loadGLAssets(GL10 gl) {
 		bodyImage = new Image(gl, this.context, R.drawable.body);
+		foodImage = new Image(gl, this.context, R.drawable.food);
 	}
 
 	@Override
@@ -57,6 +63,6 @@ public class SnakeGame extends Game {
 		snake.addUnit(new SnakeUnit(0,0,0));
 		for (int i = 0; i < 100; i++)
 			snake.addUnit(new SnakeUnit(i+1,0,45));
+		food = new SnakeFood(.5f, .5f);
 	}
-
 }
