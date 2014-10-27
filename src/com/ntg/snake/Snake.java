@@ -14,6 +14,7 @@ public class Snake {
 	private float x, y;
 	private float angle;
 	private float speed;
+	private float turningSpeed;
 	
 	private boolean angleChanged;
 	
@@ -28,6 +29,7 @@ public class Snake {
 		this.angle = (float) Math.atan2(vy, vx);
 		this.speed = speed;
 		this.angleChanged = false;
+		this.turningSpeed = .02f;
 	}
 	
 	public void setAngle(float angle) {
@@ -50,6 +52,41 @@ public class Snake {
 		this.angle += angle;
 	}
 	
+	public void goToGoal(float goalX, float goalY) {
+		float sinAng = (float) Math.sin(angle);
+		float cosAng = (float) Math.cos(angle);
+		float diffX = goalX - x;
+		float diffY = goalY - y;
+		
+		if (Math.abs(cosAng) <= .7) {
+			float slope = cosAng/sinAng;
+			float xint = x - slope * y;
+			float lx = slope*goalY + xint;
+			if (sinAng < 0) {
+				lx = -lx;
+				goalX = -goalX;
+			}
+			if (lx < goalX) {
+				addAngle(-turningSpeed);
+			} else {
+				addAngle(turningSpeed);
+			}
+		} else {
+			float slope = sinAng/cosAng;
+			float yint = y - slope * x;
+			float ly = slope*goalX + yint;
+			if (cosAng < 0) {
+				ly = -ly;
+				goalY = -goalY;
+			}
+			if (ly < goalY) {
+				addAngle(turningSpeed);
+			} else {
+				addAngle(-turningSpeed);
+			}
+		}
+	}
+	
 	public void render(GL10 gl) {
 		synchronized (body) {
 			for (SnakeUnit unit : body) {
@@ -59,6 +96,12 @@ public class Snake {
 	}
 	
 	public void update(double delta) {
+		
+		if (angle > 2*Math.PI) {
+			angle = (float) (angle - 2*Math.PI);
+		} else if (angle < 0) {
+			angle = (float) (angle + 2*Math.PI);
+		}
 		
 		x = x + (float) (Math.cos(angle)*speed*delta);
 		y = y + (float) (Math.sin(angle)*speed*delta);
