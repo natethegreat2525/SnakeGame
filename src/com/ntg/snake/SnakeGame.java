@@ -44,7 +44,7 @@ public class SnakeGame extends Game {
 			for (TouchPoint p : TouchPoint.activeList) {
 				double x = (TouchPoint.transformX(p.getLastX()));
 				double y = (TouchPoint.transformY(p.getLastY()));
-				snake.addAngle((float) (x/50.0));
+				snake.addAngle((float) ((x/20.0)*delta));
 			}
 		}
 		snake.update(delta);
@@ -59,9 +59,9 @@ public class SnakeGame extends Game {
 
 	@Override
 	public void init() {
-		snake = new Snake(0, 0, 1, 0, .003f);
+		snake = new Snake(0, 0, 1, 0, .005f);
 		snake.addUnit(new SnakeUnit(0,0,0));
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 10; i++)
 			snake.addUnit(new SnakeUnit(i+1,0,45));
 		food = new SnakeFood(.5f, .5f);
 	}

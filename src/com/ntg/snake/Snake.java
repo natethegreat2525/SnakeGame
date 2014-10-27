@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import android.util.Log;
+
 public class Snake {
 	
 	private ArrayList<SnakeUnit> body;
@@ -12,6 +14,8 @@ public class Snake {
 	private float x, y;
 	private float angle;
 	private float speed;
+	
+	private boolean angleChanged;
 	
 	public Snake(float x, float y, float vx, float vy, float speed) {
 		super();
@@ -23,9 +27,14 @@ public class Snake {
 		this.y = y;
 		this.angle = (float) Math.atan2(vy, vx);
 		this.speed = speed;
+		this.angleChanged = false;
 	}
 	
 	public void setAngle(float angle) {
+		
+		if (angle != this.angle)
+			angleChanged = true;
+		
 		this.angle = angle;
 	}
 	
@@ -34,6 +43,10 @@ public class Snake {
 	}
 	
 	public void addAngle(float angle) {
+		
+		if (angle != 0)
+			angleChanged = true;
+		
 		this.angle += angle;
 	}
 	
@@ -50,22 +63,44 @@ public class Snake {
 		x = x + (float) (Math.cos(angle)*speed*delta);
 		y = y + (float) (Math.sin(angle)*speed*delta);
 		
-		SnakePoint last = history.get(0);
-		
-		history.add(0, new SnakePoint(x, y, last.x - x, last.y - y));
+		newSnakePoint();
 		
 		synchronized (body) {
 			int pos = 0;
+			int lastHistory = 0;
 			for (SnakeUnit unit : body) {
-				unit.update(history, pos);
+				int tmp = unit.update(history, pos);
+				if (tmp > lastHistory)
+					lastHistory = tmp;
 				pos++;
+			}
+			if (lastHistory < history.size() - 1) {
+				history.remove(history.size() -1);
 			}
 		}
 	}
 	
+	public void newSnakePoint() {
+		
+		SnakePoint last = history.get(0);
+
+		if (angleChanged) {
+			
+			angleChanged = false;
+			history.add(0, new SnakePoint(x, y, last.x - x, last.y - y));
+			
+		} else {
+			
+			last.setup(x, y, last.vx + (last.x - x), last.vy + (last.y - y));
+			
+		}
+	}
+	
 	public void addUnit(SnakeUnit unit) {
+		
 		if (body.size() > 0)
 			unit.setAhead(body.get(body.size()-1));
+		
 		body.add(unit);
 	}
 	
@@ -96,6 +131,11 @@ class SnakePoint {
 	public float ny;
 	
 	public SnakePoint(float x, float y, float vx, float vy) {
+		super();
+		setup(x, y, vx, vy);
+	}
+	
+	public void setup(float x, float y, float vx, float vy) {
 		this.x = x;
 		this.y = y;
 		this.vx = vx;

@@ -28,8 +28,9 @@ public class SnakeUnit {
 		SnakeGame.bodyImage.draw(gl, x, y);
 	}
 	
-	public void update(ArrayList<SnakePoint> history, int pos) {
+	public int update(ArrayList<SnakePoint> history, int pos) {
 		float targetDist = pos*LINK_DIST;
+		int cnt = 0;
 		for (SnakePoint point : history) {
 			if (point.dist < targetDist) {
 				targetDist -= point.dist;
@@ -37,9 +38,11 @@ public class SnakeUnit {
 				x = point.x + point.nx*targetDist;
 				y = point.y + point.ny*targetDist;
 				angle = (float) Math.toDegrees(Math.atan2(point.ny, point.nx));
-				break;
+				return cnt;
 			}
+			cnt++;
 		}
+		return history.size();
 	}
 
 	public float getX() {
