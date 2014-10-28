@@ -127,6 +127,7 @@ public class Snake {
 	public void foodCheck(SnakeFood food){
 		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getY())*(y - food.getY())) < 0.05 + SnakeUnit.BODY_SIZE ){
 			food.eat();
+			this.addUnit(new SnakeUnit(x,y,0));
 		}
 	}
 	
@@ -147,11 +148,12 @@ public class Snake {
 	}
 	
 	public void addUnit(SnakeUnit unit) {
-		
+		synchronized (body) {
 		if (body.size() > 0)
 			unit.setAhead(body.get(body.size()-1));
 		
 		body.add(unit);
+		}
 	}
 	
 	public SnakeUnit getHead() {
