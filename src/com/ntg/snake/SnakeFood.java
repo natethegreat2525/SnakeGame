@@ -2,6 +2,7 @@ package com.ntg.snake;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.ntg.snake.engine.Rnd;
 import com.ntg.snake.engine.viewcore.Image;
 
 public class SnakeFood {
@@ -34,9 +35,9 @@ public class SnakeFood {
 
 
 	public void eat() {
-		// TODO Auto-generated method stub
-		x= -.5f;
-		y= -.5f;
+		Rnd.init();
+		x= (float)Rnd.getRange(-1, 1);
+		y= (float)Rnd.getRange(-1, 1);
 	}
 	
 }
