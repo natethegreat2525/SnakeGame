@@ -38,6 +38,7 @@ public class Snake {
 			angleChanged = true;
 		
 		this.angle = angle;
+		
 	}
 	
 	public float getAngle() {
@@ -123,6 +124,12 @@ public class Snake {
 		}
 	}
 	
+	public void foodCheck(SnakeFood food){
+		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getX())*(y - food.getX())) < 0.05 + SnakeUnit.BODY_SIZE ){
+			food.eat();
+		}
+	}
+	
 	public void newSnakePoint() {
 		
 		SnakePoint last = history.get(0);
@@ -150,7 +157,10 @@ public class Snake {
 	public SnakeUnit getHead() {
 		return body.get(0);
 	}
+	
+
 }
+
 
 class SnakePoint {
 	public float x;

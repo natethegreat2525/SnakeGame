@@ -49,6 +49,7 @@ public class SnakeGame extends Game {
 			}
 		}
 		snake.update(delta);
+		snake.foodCheck(food);
 	}
 	
 
