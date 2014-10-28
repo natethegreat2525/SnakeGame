@@ -125,7 +125,7 @@ public class Snake {
 	}
 	
 	public void foodCheck(SnakeFood food){
-		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getX())*(y - food.getX())) < 0.05 + SnakeUnit.BODY_SIZE ){
+		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getY())*(y - food.getY())) < 0.05 + SnakeUnit.BODY_SIZE ){
 			food.eat();
 		}
 	}
