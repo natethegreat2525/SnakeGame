@@ -35,7 +35,6 @@ public class SnakeFood {
 
 
 	public void eat() {
-		Rnd.init();
 		x= (float)Rnd.getRange(-1, 1);
 		y= (float)Rnd.getRange(-1, 1);
 	}
