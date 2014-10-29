@@ -29,7 +29,7 @@ public class Snake {
 		this.angle = (float) Math.atan2(vy, vx);
 		this.speed = speed;
 		this.angleChanged = false;
-		this.turningSpeed = .02f;
+		this.turningSpeed = .07f;
 	}
 	
 	public void setAngle(float angle) {
@@ -53,7 +53,7 @@ public class Snake {
 		this.angle += angle;
 	}
 	
-	public void goToGoal(float goalX, float goalY) {
+	public void goToGoal(float goalX, float goalY, float delta) {
 		float sinAng = (float) Math.sin(angle);
 		float cosAng = (float) Math.cos(angle);
 		float diffX = goalX - x;
@@ -68,9 +68,9 @@ public class Snake {
 				goalX = -goalX;
 			}
 			if (lx < goalX) {
-				addAngle(-turningSpeed);
+				addAngle(-turningSpeed*delta);
 			} else {
-				addAngle(turningSpeed);
+				addAngle(turningSpeed*delta);
 			}
 		} else {
 			float slope = sinAng/cosAng;
@@ -125,7 +125,7 @@ public class Snake {
 	}
 	
 	public void foodCheck(SnakeFood food){
-		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getY())*(y - food.getY())) < 0.05 + SnakeUnit.BODY_SIZE ){
+		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getY())*(y - food.getY())) < SnakeFood.RADIUS + SnakeUnit.BODY_SIZE ){
 			food.eat();
 			this.addUnit(new SnakeUnit(x,y,0));
 		}

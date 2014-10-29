@@ -7,6 +7,8 @@ import com.ntg.snake.engine.viewcore.Image;
 
 public class SnakeFood {
 	
+	public static final float RADIUS = .04f;
+	
 	private float x, y;
 	
 	public SnakeFood(float x, float y) {
@@ -17,7 +19,8 @@ public class SnakeFood {
 	
 	
 	public void render(GL10 gl){
-		Image.setScale(.05f, .05f);
+		Image.setRotation((System.currentTimeMillis() / 6) % 360);
+		Image.setScale(RADIUS, RADIUS);
 		SnakeGame.foodImage.draw(gl, x, y);
 	}
 	

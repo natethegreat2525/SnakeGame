@@ -8,8 +8,8 @@ import com.ntg.snake.engine.viewcore.Image;
 
 public class SnakeUnit {
 	
-	public static final float BODY_SIZE = .03f;
-	public static final float LINK_DIST = .1f;
+	public static final float BODY_SIZE = .06f;
+	public static final float LINK_DIST = .12f;
 	
 	private float x, y;
 	private float angle;
