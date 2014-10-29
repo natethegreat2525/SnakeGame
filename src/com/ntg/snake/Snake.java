@@ -12,6 +12,7 @@ public class Snake {
 	private ArrayList<SnakePoint> history;
 	
 	private float x, y;
+	private float ox, oy;
 	private float angle;
 	private float speed;
 	private float turningSpeed;
@@ -26,6 +27,8 @@ public class Snake {
 		history.add(new SnakePoint(x, y, -vx * 100, -vy * 100));
 		this.x = x;
 		this.y = y;
+		this.ox = x - .01f;
+		this.oy = y - .01f;
 		this.angle = (float) Math.atan2(vy, vx);
 		this.speed = speed;
 		this.angleChanged = false;
@@ -104,8 +107,22 @@ public class Snake {
 			angle = (float) (angle + 2*Math.PI);
 		}
 		
+		ox = x;
+		oy = y;
+		
 		x = x + (float) (Math.cos(angle)*speed*delta);
 		y = y + (float) (Math.sin(angle)*speed*delta);
+		
+		if (x > 1) {
+			x -= 2;
+			ox -= 2;
+			angleChanged = true;
+		}
+		if (x < -1) {
+			x += 2;
+			ox += 2;
+			angleChanged = true;
+		}
 		
 		newSnakePoint();
 		
@@ -138,11 +155,11 @@ public class Snake {
 		if (angleChanged) {
 			
 			angleChanged = false;
-			history.add(0, new SnakePoint(x, y, last.x - x, last.y - y));
+			history.add(0, new SnakePoint(x, y, ox - x, oy - y));
 			
 		} else {
 			
-			last.setup(x, y, last.vx + (last.x - x), last.vy + (last.y - y));
+			last.setup(x, y, last.vx + (ox - x), last.vy + (oy - y));
 			
 		}
 	}
