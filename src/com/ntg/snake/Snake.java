@@ -48,6 +48,10 @@ public class Snake {
 		return this.angle;
 	}
 	
+	public int getSize() {
+		return body.size();
+	}
+	
 	public void addAngle(float angle) {
 		
 		if (angle != 0)

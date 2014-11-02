@@ -16,6 +16,7 @@ import com.ntg.snake.engine.sensor.SensorMgr;
 import com.ntg.snake.engine.viewcore.GLRenderer;
 import com.ntg.snake.engine.viewcore.Image;
 import com.ntg.snake.engine.viewcore.TouchPoint;
+import com.ntg.snake.engine.Number;
 
 public class SnakeGame extends Game {
 	
@@ -27,6 +28,8 @@ public class SnakeGame extends Game {
 	
 	public SnakeFood food;
 	
+	public int score;
+	
 	public SnakeGame(Context context) {
 		super(context);
 	}
@@ -36,6 +39,9 @@ public class SnakeGame extends Game {
 		Image.setAlphaBlend(gl);
 		snake.render(gl);
 		food.render(gl);
+		Image.setRotation(0);
+		Number.drawNumber(gl, score, -.8f, 1.7f, .07f);
+		
 	}
 
 	@Override
@@ -49,6 +55,7 @@ public class SnakeGame extends Game {
 			}
 		}
 		snake.update(delta);
+		score = snake.getSize() - 2;
 		snake.foodCheck(food);
 	}
 	
@@ -57,6 +64,7 @@ public class SnakeGame extends Game {
 	public void loadGLAssets(GL10 gl) {
 		bodyImage = new Image(gl, this.context, R.drawable.body);
 		foodImage = new Image(gl, this.context, R.drawable.food);
+		Number.init(this, gl);
 	}
 
 	@Override
