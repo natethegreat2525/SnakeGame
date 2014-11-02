@@ -138,7 +138,9 @@ public class Snake {
 			if (lastHistory + 20 < history.size() - 1) {
 				history.remove(history.size() -1);
 			}
+			tailTouch();
 		}
+		
 	}
 	
 	public void foodCheck(SnakeFood food){
@@ -177,6 +179,16 @@ public class Snake {
 		return body.get(0);
 	}
 	
+	public void tailTouch(){
+		for(int i=2; i < body.size(); i++){
+			if(Math.sqrt((x - body.get(i).getX())*(x-body.get(i).getX()) + (y - body.get(i).getY())*(y - body.get(i).getY())) < SnakeUnit.BODY_SIZE){
+				body = new ArrayList<SnakeUnit>();
+				addUnit(new SnakeUnit(0,0,45));
+				addUnit(new SnakeUnit(0,0,45));
+			}
+		}
+	
+	}
 
 }
 
