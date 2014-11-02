@@ -40,7 +40,7 @@ public class SnakeGame extends Game {
 		snake.render(gl);
 		food.render(gl);
 		Image.setRotation(0);
-		Number.drawNumber(gl, score, -.8f, 1.7f, .07f);
+		Number.drawNumber(gl, score, TouchPoint.transformX(0) + .07f, TouchPoint.transformY(0) - .07f, .07f);
 		
 	}
 
