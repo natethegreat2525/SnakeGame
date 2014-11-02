@@ -135,7 +135,7 @@ public class Snake {
 					lastHistory = tmp;
 				pos++;
 			}
-			if (lastHistory < history.size() - 1) {
+			if (lastHistory + 20 < history.size() - 1) {
 				history.remove(history.size() -1);
 			}
 		}

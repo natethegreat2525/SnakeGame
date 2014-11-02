@@ -32,7 +32,7 @@ public class SnakeUnit {
 		float targetDist = pos*LINK_DIST;
 		int cnt = 0;
 		for (SnakePoint point : history) {
-			if (point.dist < targetDist) {
+			if (point.dist < targetDist && point != history.get(history.size() - 1)) {
 				targetDist -= point.dist;
 			} else {
 				x = point.x + point.nx*targetDist;
