@@ -131,6 +131,7 @@ public class Snake {
 		newSnakePoint();
 		
 		synchronized (body) {
+			tailTouch();
 			int pos = 0;
 			int lastHistory = 0;
 			for (SnakeUnit unit : body) {
@@ -142,7 +143,6 @@ public class Snake {
 			if (lastHistory + 20 < history.size() - 1) {
 				history.remove(history.size() -1);
 			}
-			tailTouch();
 		}
 		
 	}
@@ -150,7 +150,7 @@ public class Snake {
 	public void foodCheck(SnakeFood food){
 		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getY())*(y - food.getY())) < SnakeFood.RADIUS + SnakeUnit.BODY_SIZE ){
 			food.eat();
-			this.addUnit(new SnakeUnit(x,y,0));
+			this.addUnit(new SnakeUnit(-100,-100,0));
 		}
 	}
 	
@@ -185,7 +185,7 @@ public class Snake {
 	
 	public void tailTouch(){
 		for(int i=2; i < body.size(); i++){
-			if(Math.sqrt((x - body.get(i).getX())*(x-body.get(i).getX()) + (y - body.get(i).getY())*(y - body.get(i).getY())) < SnakeUnit.BODY_SIZE){
+			if(Math.sqrt((x - body.get(i).getX())*(x-body.get(i).getX()) + (y - body.get(i).getY())*(y - body.get(i).getY())) < SnakeUnit.BODY_SIZE * 2){
 				body = new ArrayList<SnakeUnit>();
 				addUnit(new SnakeUnit(0,0,45));
 				addUnit(new SnakeUnit(0,0,45));
