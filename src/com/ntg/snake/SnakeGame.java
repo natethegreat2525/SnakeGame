@@ -26,7 +26,7 @@ public class SnakeGame extends Game {
 	
 	public Snake snake;
 	
-	public SnakeFood food;
+	public Food food;
 	
 	public int score;
 	
@@ -73,7 +73,7 @@ public class SnakeGame extends Game {
 		snake.addUnit(new SnakeUnit(0,0,0));
 		for (int i = 0; i < 1; i++)
 			snake.addUnit(new SnakeUnit(i+1,0,45));
-		food = new SnakeFood(.5f, .5f);
+		food = new NormalSnakeFood(.5f, .5f);
 		Rnd.init();
 	}
 }

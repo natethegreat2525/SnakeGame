@@ -147,8 +147,8 @@ public class Snake {
 		
 	}
 	
-	public void foodCheck(SnakeFood food){
-		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getY())*(y - food.getY())) < SnakeFood.RADIUS + SnakeUnit.BODY_SIZE ){
+	public void foodCheck(Food food){
+		if(Math.sqrt((x - food.getX())*(x-food.getX()) + (y - food.getY())*(y - food.getY())) < NormalSnakeFood.RADIUS + SnakeUnit.BODY_SIZE ){
 			food.eat();
 			this.addUnit(new SnakeUnit(-100,-100,0));
 		}
