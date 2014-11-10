@@ -5,4 +5,10 @@ package com.ntg.snake.state;
  *
  */
 public abstract class State implements StateManager {
+	
+	public State() {
+		super();
+	}
+	
+	
 }

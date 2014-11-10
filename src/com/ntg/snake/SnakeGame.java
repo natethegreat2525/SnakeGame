@@ -24,9 +24,13 @@ public class SnakeGame extends Game {
 	
 	public static Image foodImage;
 	
+	public static Image[] beeImage;
+	
 	public Snake snake;
 	
 	public Food food;
+	
+	public BeeEnemy bee;
 	
 	public int score;
 	
@@ -37,6 +41,7 @@ public class SnakeGame extends Game {
 	@Override
 	public void render(GLRenderer renderer, GL10 gl) {
 		Image.setAlphaBlend(gl);
+		bee.render(gl);
 		snake.render(gl);
 		food.render(gl);
 		Image.setRotation(0);
@@ -54,6 +59,7 @@ public class SnakeGame extends Game {
 				snake.goToGoal((float) x, (float) y, (float) delta);
 			}
 		}
+		bee.update(delta);
 		snake.update(delta);
 		score = snake.getSize() - 2;
 		snake.foodCheck(food);
@@ -64,6 +70,11 @@ public class SnakeGame extends Game {
 	public void loadGLAssets(GL10 gl) {
 		bodyImage = new Image(gl, this.context, R.drawable.body);
 		foodImage = new Image(gl, this.context, R.drawable.food);
+		
+		beeImage = new Image[2];
+		beeImage[0] = new Image(gl, this.context, R.drawable.bee1);
+		beeImage[1] = new Image(gl, this.context, R.drawable.bee2);
+		
 		Number.init(this, gl);
 	}
 
@@ -74,6 +85,7 @@ public class SnakeGame extends Game {
 		for (int i = 0; i < 1; i++)
 			snake.addUnit(new SnakeUnit(i+1,0,45));
 		food = new NormalSnakeFood(.5f, .5f);
+		bee = new BeeEnemy(0, 0, 90, .006f);
 		Rnd.init();
 	}
 }

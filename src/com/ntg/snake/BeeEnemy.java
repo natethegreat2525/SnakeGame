@@ -1,28 +1,42 @@
 package com.ntg.snake;
 
+import android.util.Log;
+
 import com.ntg.snake.engine.viewcore.Image;
 import javax.microedition.khronos.opengles.GL10;
 
 public class BeeEnemy extends Enemy {
 	
 	public static final float RADIUS = .04f;
+	public static final int WING_FLAP = 300;
 	
 	private float x, y;
+	private float angle;
+	private float speed;
 	
-	public BeeEnemy(float x, float y) {
+	private long wingFlapMillis;
+	
+	public BeeEnemy(float x, float y, float angle, float speed) {
 		super();
 		this.x = x;
 		this.y = y;
+		this.angle = angle;
+		this.speed = speed;
 	}
 	
-	public void update(){
-		
+	public void update(double delta){
+		float dx = (float) (Math.cos(Math.toRadians(angle + 180))*speed*delta);
+		float dy = (float) (Math.sin(Math.toRadians(angle + 180))*speed*delta);
+		x += dx;
+		y += dy;
+		angle += delta;
 	}
 	
 	public void render(GL10 gl){
-		Image.setRotation((System.currentTimeMillis() / 6) % 360);
-		Image.setScale(RADIUS, RADIUS);
-		//SnakeGame.BeeImage.draw(gl, x, y);
+		Image.setRotation(angle % 360);
+		Image.setScale(RADIUS*2, RADIUS*2);
+		SnakeGame.beeImage[(int) ((System.currentTimeMillis() / WING_FLAP) % 2)].draw(gl, x, y);
+		Log.i("pos",x + " " + y);
 	}
 	
 
