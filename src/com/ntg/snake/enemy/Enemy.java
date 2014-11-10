@@ -1,4 +1,4 @@
-package com.ntg.snake;
+package com.ntg.snake.enemy;
 
 public abstract class Enemy {
 	

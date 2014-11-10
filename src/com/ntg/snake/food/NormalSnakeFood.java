@@ -1,7 +1,8 @@
-package com.ntg.snake;
+package com.ntg.snake.food;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.ntg.snake.SnakeGame;
 import com.ntg.snake.engine.Rnd;
 import com.ntg.snake.engine.viewcore.Image;
 

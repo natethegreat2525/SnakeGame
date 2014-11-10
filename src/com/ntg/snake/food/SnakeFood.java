@@ -1,16 +1,18 @@
-package com.ntg.snake;
+package com.ntg.snake.food;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.ntg.snake.SnakeGame;
 import com.ntg.snake.engine.Rnd;
 import com.ntg.snake.engine.viewcore.Image;
 
-public class SuperSnakeFood extends Food {
-public static final float RADIUS = .07f;
+public class SnakeFood {
 	
-	private float x, y, angle, speed;
+	public static final float RADIUS = .04f;
 	
-	public SuperSnakeFood(float x, float y) {
+	private float x, y;
+	
+	public SnakeFood(float x, float y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -40,4 +42,5 @@ public static final float RADIUS = .07f;
 		x = (float)Rnd.getRange(-1, 1);
 		y = (float)Rnd.getRange(-1, 1);
 	}
+	
 }

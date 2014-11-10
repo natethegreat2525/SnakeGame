@@ -10,6 +10,7 @@ import android.content.Context;
 import android.hardware.SensorManager;
 
 import com.ntg.snake.R;
+import com.ntg.snake.enemy.BeeEnemy;
 import com.ntg.snake.engine.Game;
 import com.ntg.snake.engine.Rnd;
 import com.ntg.snake.engine.sensor.SensorMgr;
@@ -17,6 +18,10 @@ import com.ntg.snake.engine.viewcore.GLRenderer;
 import com.ntg.snake.engine.viewcore.Image;
 import com.ntg.snake.engine.viewcore.TouchPoint;
 import com.ntg.snake.engine.Number;
+import com.ntg.snake.food.Food;
+import com.ntg.snake.food.NormalSnakeFood;
+import com.ntg.snake.player.Snake;
+import com.ntg.snake.player.SnakeUnit;
 
 public class SnakeGame extends Game {
 	

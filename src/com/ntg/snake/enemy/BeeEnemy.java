@@ -1,7 +1,8 @@
-package com.ntg.snake;
+package com.ntg.snake.enemy;
 
 import android.util.Log;
 
+import com.ntg.snake.SnakeGame;
 import com.ntg.snake.engine.viewcore.Image;
 import javax.microedition.khronos.opengles.GL10;
 

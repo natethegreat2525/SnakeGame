@@ -1,8 +1,11 @@
-package com.ntg.snake;
+package com.ntg.snake.player;
 
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
+
+import com.ntg.snake.food.Food;
+import com.ntg.snake.food.NormalSnakeFood;
 
 import android.util.Log;
 
