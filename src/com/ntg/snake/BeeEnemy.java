@@ -3,7 +3,7 @@ package com.ntg.snake;
 import com.ntg.snake.engine.viewcore.Image;
 import javax.microedition.khronos.opengles.GL10;
 
-public class BeeEnemy extends Enemies {
+public class BeeEnemy extends Enemy {
 	
 	public static final float RADIUS = .04f;
 	

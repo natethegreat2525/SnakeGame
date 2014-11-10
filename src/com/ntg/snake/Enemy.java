@@ -1,6 +1,6 @@
 package com.ntg.snake;
 
-public abstract class Enemies {
+public abstract class Enemy {
 	
 	abstract void die();
 	
