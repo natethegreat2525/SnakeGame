@@ -9,6 +9,15 @@ import com.ntg.snake.state.State;
 
 public class MenuState extends State {
 
+	public int touchPoints;
+	
+	public MenuState() {
+		super();
+		synchronized (TouchPoint.activeList) {
+			touchPoints = TouchPoint.activeList.size();
+		}
+	}
+	
 	@Override
 	public void render(GL10 gl) {
 		Image.setRotation((System.currentTimeMillis()/10) % 360);
@@ -19,9 +28,10 @@ public class MenuState extends State {
 	@Override
 	public State update(double delta) {
 		synchronized (TouchPoint.activeList) {
-			if (TouchPoint.activeList.size() > 0) {
-				TouchPoint.activeList.remove(0);
+			if (TouchPoint.activeList.size() > touchPoints) {
 				return new PlayState();
+			} else {
+				touchPoints = TouchPoint.activeList.size();
 			}
 		}
 		return this;
