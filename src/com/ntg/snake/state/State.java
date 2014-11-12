@@ -24,14 +24,17 @@ public abstract class State implements StateManager {
 	 */
 	public abstract State update(double delta);
 	
-	public State updateState(double delta) {
+	public void updateState(double delta) {
 		State next = this.update(delta);
+		
+		synchronized (childState) {
+			childState = next;
+		}
 		
 		if (childState != null) {
 			childState.updateState(delta);
 		}
 		
-		return next;
 	}
 	
 	public void renderState(GL10 gl) {
