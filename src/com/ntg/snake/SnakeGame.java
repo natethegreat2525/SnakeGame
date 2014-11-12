@@ -22,6 +22,8 @@ import com.ntg.snake.food.Food;
 import com.ntg.snake.food.NormalSnakeFood;
 import com.ntg.snake.player.Snake;
 import com.ntg.snake.player.SnakeUnit;
+import com.ntg.snake.state.MainState;
+import com.ntg.snake.state.State;
 
 public class SnakeGame extends Game {
 	
@@ -37,6 +39,8 @@ public class SnakeGame extends Game {
 	
 	public BeeEnemy bee;
 	
+	public State mainState;
+	
 	public int score;
 	
 	public SnakeGame(Context context) {
@@ -46,28 +50,30 @@ public class SnakeGame extends Game {
 	@Override
 	public void render(GLRenderer renderer, GL10 gl) {
 		Image.setAlphaBlend(gl);
-		bee.render(gl);
-		snake.render(gl);
-		food.render(gl);
-		Image.setRotation(0);
-		Number.drawNumber(gl, score, TouchPoint.transformX(0) + .07f, TouchPoint.transformY(0) - .07f, .07f);
+//		bee.render(gl);
+//		snake.render(gl);
+//		food.render(gl);
+//		Image.setRotation(0);
+//		Number.drawNumber(gl, score, TouchPoint.transformX(0) + .07f, TouchPoint.transformY(0) - .07f, .07f);
+		mainState.renderState(gl);
 		
 	}
 
 	@Override
 	public void update(double delta) {
-		synchronized (TouchPoint.activeList) {
-			if (TouchPoint.activeList.size() > 0) {
-				TouchPoint first = TouchPoint.activeList.get(0);
-				double x = (TouchPoint.transformX(first.getLastX()));
-				double y = (TouchPoint.transformY(first.getLastY()));
-				snake.goToGoal((float) x, (float) y, (float) delta);
-			}
-		}
-		bee.update(delta);
-		snake.update(delta);
-		score = snake.getSize() - 2;
-		snake.foodCheck(food);
+//		synchronized (TouchPoint.activeList) {
+//			if (TouchPoint.activeList.size() > 0) {
+//				TouchPoint first = TouchPoint.activeList.get(0);
+//				double x = (TouchPoint.transformX(first.getLastX()));
+//				double y = (TouchPoint.transformY(first.getLastY()));
+//				snake.goToGoal((float) x, (float) y, (float) delta);
+//			}
+//		}
+//		bee.update(delta);
+//		snake.update(delta);
+//		score = snake.getSize() - 2;
+//		snake.foodCheck(food);
+		mainState.updateState(delta);
 	}
 	
 
@@ -92,5 +98,6 @@ public class SnakeGame extends Game {
 		food = new NormalSnakeFood(.5f, .5f);
 		bee = new BeeEnemy(0, 0, 90, .006f);
 		Rnd.init();
+		mainState = new MainState();
 	}
 }
