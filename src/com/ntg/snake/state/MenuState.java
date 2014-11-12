@@ -4,6 +4,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.ntg.snake.SnakeGame;
 import com.ntg.snake.engine.viewcore.Image;
+import com.ntg.snake.engine.viewcore.TouchPoint;
 import com.ntg.snake.state.State;
 
 public class MenuState extends State {
@@ -17,7 +18,12 @@ public class MenuState extends State {
 
 	@Override
 	public State update(double delta) {
-		
+		synchronized (TouchPoint.activeList) {
+			if (TouchPoint.activeList.size() > 0) {
+				TouchPoint.activeList.remove(0);
+				return new PlayState();
+			}
+		}
 		return this;
 	}
 
