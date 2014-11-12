@@ -6,7 +6,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Defines a state of the game.
  *
  */
-public abstract class State implements StateManager {
+public abstract class State {
 	
 	public State childState;
 	
