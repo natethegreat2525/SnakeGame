@@ -9,7 +9,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class BeeEnemy extends Enemy {
 	
 	public static final float RADIUS = .04f;
-	public static final int WING_FLAP = 300;
+	public static final int WING_FLAP = 100;
 	
 	private float x, y;
 	private float angle;
