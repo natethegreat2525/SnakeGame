@@ -1,5 +1,7 @@
 package com.ntg.snake.state;
 
+import javax.microedition.khronos.opengles.GL10;
+
 /**
  * Defines a state of the game.
  *
@@ -13,6 +15,13 @@ public abstract class State implements StateManager {
 		childState = null;
 	}
 	
+	public abstract void render(GL10 gl);
+	
+	/**
+	 * Whenever child state is changed, it must by synchronized
+	 * @param delta
+	 * @return
+	 */
 	public abstract State update(double delta);
 	
 	public State updateState(double delta) {
@@ -23,6 +32,17 @@ public abstract class State implements StateManager {
 		}
 		
 		return next;
+	}
+	
+	public void renderState(GL10 gl) {
+		this.render(gl);
+		
+		synchronized (childState) {
+			if (childState != null) {
+				childState.renderState(gl);
+			}
+		}
+		
 	}
 	
 	
