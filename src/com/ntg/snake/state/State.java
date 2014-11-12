@@ -27,8 +27,10 @@ public abstract class State implements StateManager {
 	public void updateState(double delta) {
 		State next = this.update(delta);
 		
-		synchronized (childState) {
-			childState = next;
+		if (childState != null) {
+			synchronized (childState) {
+				childState = next;
+			}
 		}
 		
 		if (childState != null) {
@@ -40,9 +42,11 @@ public abstract class State implements StateManager {
 	public void renderState(GL10 gl) {
 		this.render(gl);
 		
-		synchronized (childState) {
-			if (childState != null) {
-				childState.renderState(gl);
+		if (childState != null) {
+			synchronized (childState) {
+				if (childState != null) {
+					childState.renderState(gl);
+				}
 			}
 		}
 		
