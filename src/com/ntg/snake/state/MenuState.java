@@ -4,19 +4,15 @@ import javax.microedition.khronos.opengles.GL10;
 
 import com.ntg.snake.SnakeGame;
 import com.ntg.snake.engine.viewcore.Image;
+import com.ntg.snake.state.State;
 
-public class MainState extends State {
+public class MenuState extends State {
 
-	public MainState() {
-		super();
-		this.childState = new MenuState();
-	}
-	
 	@Override
 	public void render(GL10 gl) {
 		Image.setRotation((System.currentTimeMillis()/10) % 360);
 		Image.setScale(.5,.5);
-		SnakeGame.foodImage.draw(gl, 0, 0);
+		SnakeGame.beeImage[0].draw(gl, 0, .5f);
 	}
 
 	@Override

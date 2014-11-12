@@ -24,18 +24,17 @@ public abstract class State {
 	 */
 	public abstract State update(double delta);
 	
-	public void updateState(double delta) {
+	public State updateState(double delta) {
 		State next = this.update(delta);
 		
 		if (childState != null) {
+			State nextChild = childState.updateState(delta);
 			synchronized (childState) {
-				childState = next;
+				childState = nextChild;
 			}
 		}
 		
-		if (childState != null) {
-			childState.updateState(delta);
-		}
+		return next;
 		
 	}
 	
