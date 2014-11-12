@@ -33,15 +33,7 @@ public class SnakeGame extends Game {
 	
 	public static Image[] beeImage;
 	
-	public Snake snake;
-	
-	public Food food;
-	
-	public BeeEnemy bee;
-	
 	public State mainState;
-	
-	public int score;
 	
 	public SnakeGame(Context context) {
 		super(context);
@@ -49,30 +41,12 @@ public class SnakeGame extends Game {
 	
 	@Override
 	public void render(GLRenderer renderer, GL10 gl) {
-		Image.setAlphaBlend(gl);
-//		bee.render(gl);
-//		snake.render(gl);
-//		food.render(gl);
-//		Image.setRotation(0);
-//		Number.drawNumber(gl, score, TouchPoint.transformX(0) + .07f, TouchPoint.transformY(0) - .07f, .07f);
 		mainState.renderState(gl);
 		
 	}
 
 	@Override
 	public void update(double delta) {
-//		synchronized (TouchPoint.activeList) {
-//			if (TouchPoint.activeList.size() > 0) {
-//				TouchPoint first = TouchPoint.activeList.get(0);
-//				double x = (TouchPoint.transformX(first.getLastX()));
-//				double y = (TouchPoint.transformY(first.getLastY()));
-//				snake.goToGoal((float) x, (float) y, (float) delta);
-//			}
-//		}
-//		bee.update(delta);
-//		snake.update(delta);
-//		score = snake.getSize() - 2;
-//		snake.foodCheck(food);
 		mainState.updateState(delta);
 	}
 	
@@ -91,12 +65,6 @@ public class SnakeGame extends Game {
 
 	@Override
 	public void init() {
-//		snake = new Snake(0, 0, 1, 0, .01f);
-//		snake.addUnit(new SnakeUnit(0,0,0));
-//		for (int i = 0; i < 1; i++)
-//			snake.addUnit(new SnakeUnit(i+1,0,45));
-//		food = new NormalSnakeFood(.5f, .5f);
-//		bee = new BeeEnemy(0, 0, 90, .006f);
 		Rnd.init();
 		mainState = new MainState();
 	}
