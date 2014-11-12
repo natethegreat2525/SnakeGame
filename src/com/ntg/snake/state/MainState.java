@@ -14,9 +14,7 @@ public class MainState extends State {
 	
 	@Override
 	public void render(GL10 gl) {
-		Image.setRotation((System.currentTimeMillis()/10) % 360);
-		Image.setScale(.5,.5);
-		SnakeGame.foodImage.draw(gl, 0, 0);
+		return;
 	}
 
 	@Override
