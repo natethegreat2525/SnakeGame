@@ -55,6 +55,9 @@ public class PlayState extends State {
 		snake.update(delta);
 		score = snake.getSize() - 2;
 		snake.foodCheck(food);
+		if(snake.tailTouch()){
+			return new MenuState();
+		}
 		return this;
 	}
 }
