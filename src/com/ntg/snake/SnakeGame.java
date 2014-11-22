@@ -33,6 +33,11 @@ public class SnakeGame extends Game {
 	
 	public static Image[] beeImage;
 	
+	public static Image playButton;
+	
+	public static Image quitButton;
+
+	
 	public State mainState;
 	
 	public SnakeGame(Context context) {
@@ -59,6 +64,9 @@ public class SnakeGame extends Game {
 		beeImage = new Image[2];
 		beeImage[0] = new Image(gl, this.context, R.drawable.bee1);
 		beeImage[1] = new Image(gl, this.context, R.drawable.bee2);
+		
+		playButton = new Image(gl, this.context, R.drawable.play_button);
+		quitButton = new Image(gl, this.context, R.drawable.quit_button);
 		
 		Number.init(this, gl);
 	}

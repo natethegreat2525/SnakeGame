@@ -20,9 +20,9 @@ public class MenuState extends State {
 	
 	@Override
 	public void render(GL10 gl) {
-		Image.setRotation((System.currentTimeMillis()/10) % 360);
 		Image.setScale(.5,.5);
-		SnakeGame.beeImage[0].draw(gl, 0, .5f);
+		SnakeGame.playButton.draw(gl, 0, .5f);
+		SnakeGame.quitButton.draw(gl, 0, -.6f);
 	}
 
 	@Override
