@@ -33,6 +33,8 @@ public class SnakeGame extends Game {
 	
 	public static Image[] beeImage;
 	
+	public static Image circleImage;
+	
 	public static Image playButton;
 	
 	public static Image quitButton;
@@ -46,6 +48,8 @@ public class SnakeGame extends Game {
 	
 	@Override
 	public void render(GLRenderer renderer, GL10 gl) {
+		gl.glClearColor(.3f, .15f, 0, 1);
+		Image.setAlphaBlend(gl);
 		mainState.renderState(gl);
 		
 	}
@@ -60,6 +64,7 @@ public class SnakeGame extends Game {
 	public void loadGLAssets(GL10 gl) {
 		bodyImage = new Image(gl, this.context, R.drawable.body);
 		foodImage = new Image(gl, this.context, R.drawable.food);
+		circleImage = new Image(gl, this.context, R.drawable.white_circle);
 		
 		beeImage = new Image[2];
 		beeImage[0] = new Image(gl, this.context, R.drawable.bee1);

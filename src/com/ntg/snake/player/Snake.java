@@ -4,12 +4,18 @@ import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import com.ntg.snake.SnakeGame;
+import com.ntg.snake.engine.viewcore.Image;
 import com.ntg.snake.food.Food;
 import com.ntg.snake.food.NormalSnakeFood;
 
 import android.util.Log;
 
 public class Snake {
+	
+	public static final float EYE_SIZE = .04f;
+	public static final float EYE_DIST = .04f;
+	public static final float PUPIL_SIZE = .025f;
 	
 	private ArrayList<SnakeUnit> body;
 	private ArrayList<SnakePoint> history;
@@ -99,11 +105,34 @@ public class Snake {
 	}
 	
 	public void render(GL10 gl) {
+		renderBody(gl);
+		renderEyes(gl);
+	}
+	
+	private void renderBody(GL10 gl) {
 		synchronized (body) {
 			for (SnakeUnit unit : body) {
 				unit.render(gl);
 			}
 		}
+	}
+	
+	private void renderEyes(GL10 gl) {
+		float dx = (float) Math.cos(angle);
+		float dy = (float) Math.sin(angle);
+		float ex = dx*EYE_DIST;
+		float ey = dy*EYE_DIST;
+		drawEye(gl, x + ey + ex, y - ex + ey, dx*PUPIL_SIZE, dy*PUPIL_SIZE);
+		drawEye(gl, x - ey + ex, y + ex + ey, dx*PUPIL_SIZE, dy*PUPIL_SIZE);
+	}
+	
+	private void drawEye(GL10 gl, float x, float y, float px, float py) {
+		Image.setScale(EYE_SIZE, EYE_SIZE);
+		SnakeGame.circleImage.draw(gl, x, y);
+		gl.glColor4f(0, 0, 0, 1);
+		Image.setScale(PUPIL_SIZE, PUPIL_SIZE);
+		SnakeGame.circleImage.draw(gl, x + px, y + py);
+		gl.glColor4f(1, 1, 1, 1);
 	}
 	
 	public void update(double delta) {
