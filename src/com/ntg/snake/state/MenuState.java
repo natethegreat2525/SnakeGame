@@ -28,13 +28,30 @@ public class MenuState extends State {
 	@Override
 	public State update(double delta) {
 		synchronized (TouchPoint.activeList) {
-			if (TouchPoint.activeList.size() > touchPoints) {
+			if (touchPointInBox(-.4, .4, .75, .25)) {
 				return new PlayState();
-			} else {
-				touchPoints = TouchPoint.activeList.size();
+			}
+			if(touchPointInBox(-.4, .4, -.35, -.85)){
+				System.exit(0);
 			}
 		}
 		return this;
+	}
+	
+	public boolean touchPointInBox(double xleft, double xright, double ytop, double ybottom){
+		if (TouchPoint.activeList.size() > 0) {
+			TouchPoint first = TouchPoint.activeList.get(0);
+			double x = (TouchPoint.transformX(first.getLastX()));
+			double y = (TouchPoint.transformY(first.getLastY()));
+			if(x>xleft && x<xright && y>ybottom && y<ytop){
+				return true;
+			}
+		}
+		
+		else {
+			touchPoints = TouchPoint.activeList.size();
+		}
+		return false;
 	}
 
 }
